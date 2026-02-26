@@ -1,0 +1,32 @@
+const URL = 'http://127.0.0.1:3000';
+
+export async function getServices () {
+  try {
+    const res = await fetch(`${URL}/services`);
+
+    if(!res.ok) {
+      throw new Error('Failed to fetch services');
+    }
+    return res.json();
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export async function addService (data) {
+  try {
+    const res = await fetch(`${URL}/services`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(data)
+    });
+
+    if(!res.ok) {
+      throw new Error('Failed to add service');
+    }
+
+    return res.json();
+  } catch (error) {
+    console.error(error);
+  }
+};
