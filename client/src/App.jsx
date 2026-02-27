@@ -30,9 +30,9 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div>
+      <div className='min-h-screen bg-slate-900 text-white '>
         <Navbar />
-        <div>
+        <div className='p-8 max-w-6xl mx-auto'>
           <Routes>
             <Route path='/' element={<Dashboard vehicles={vehicles} services={services} />}/>
             <Route path='/vehicles' element={<MyVehicles vehicles={vehicles} fetchVehicles={fetchVehicles} />}/>
