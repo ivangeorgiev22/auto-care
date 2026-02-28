@@ -4,7 +4,7 @@ export default function Dashboard ({vehicles, services}) {
   // only get the last five to show in recent activity
   const recentActivity = services.slice(0,5);
   //calculate overdue services
-  const upcomingServices = vehicles.filter((v) => {
+  const overdueServices = vehicles.filter((v) => {
     //look at Oil Change service type only
     const oilChange = v.Services?.filter((s) => s.serviceType === 'Oil Change');
     // if vehicle has no oil change services logged yet skip
@@ -36,7 +36,7 @@ export default function Dashboard ({vehicles, services}) {
         </div>
         <div className="bg-neutral-800 border border-neutral-800 p-5 rounded-xl">
           <p className="text-neutral-400"> ⚠️&nbsp; Overdue Services</p>
-          <p className="text-2xl font-bold mt-1">{upcomingServices}</p>
+          <p className="text-2xl font-bold mt-1">{overdueServices}</p>
         </div>
       </div>
     </div>
