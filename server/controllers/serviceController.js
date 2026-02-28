@@ -3,7 +3,9 @@ const db = require('../models/index.js');
 
 async function getServices (req, res) {
   try {
-    const services = await db.Service.findAll();
+    const services = await db.Service.findAll({
+      order: [['date', 'DESC']]
+    });
 
     res.status(200).json(services);
   } catch (error) {

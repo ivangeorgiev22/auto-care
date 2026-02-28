@@ -3,7 +3,11 @@ const db = require('../models/index.js');
 
 async function getVehicles (req,res) {
   try {
-    const vehicles = await db.Vehicle.findAll();
+    const vehicles = await db.Vehicle.findAll({
+      include: {
+        model: db.Service
+      }
+    });
     res.status(200).json(vehicles);
   } catch (error) {
     res.status(500);
@@ -15,8 +19,9 @@ async function getVehicleById (req,res) {
   try {
     const vehicle = await db.Vehicle.findByPk(req.params.id, {
       include: {
-        model: db.Service
-      }
+        model: db.Service,
+      },
+      order: [[db.Service, 'date', 'DESC']]
     });
     if (!vehicle) {
       return res.status(404).json({msg: "Vehicle Not Found."});

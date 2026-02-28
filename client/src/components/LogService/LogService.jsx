@@ -5,7 +5,7 @@ import { Link } from "react-router";
 
 
 
-export default function LogService ({vehicles, fetchServices}) {
+export default function LogService ({vehicles, fetchServices, fetchVehicles}) {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
@@ -24,6 +24,7 @@ export default function LogService ({vehicles, fetchServices}) {
     e.preventDefault();
     await addService(form);
     await fetchServices();
+    await fetchVehicles();
     navigate('/');
   }
 
