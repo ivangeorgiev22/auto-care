@@ -14,7 +14,7 @@ export default function MyVehicles ({vehicles, fetchVehicles}) {
           + Add Vehicle
         </button>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+      <div className="grid grid-cols-3">
         {vehicles.length === 0 ? (
           <div className="bg-neutral-900 p-8 px-20 rounded-xl text-center w-max text-neutral-400 ml-70 border border-neutral-700">
             You don't have any vehicles yet. Add your first one!

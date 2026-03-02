@@ -31,7 +31,7 @@ export default function VehicleDetails ({fetchVehicles, fetchServices}) {
   }
 
   return (
-  <div className="">
+  <div>
     <div className="flex justify-between items-start mb-8">
       <div>
         <h1 className="text-3xl font-semibold flex items-center gap-3">
@@ -50,8 +50,9 @@ export default function VehicleDetails ({fetchVehicles, fetchServices}) {
     </div>
     <div>
       <div className="flex justify-between items-center mb-3">
-        <h2 className="text-lg font-semibold flex items-center gap-2">
-          🔧&nbsp; Service History
+        <h2 className="text-lg font-semibold flex items-center gap-1">
+          <svg xmlns="http://www.w3.org/2000/svg" height="25px" viewBox="0 -960 960 960" width="25px" fill="#e3e3e3"><path d="M666-163 475-354q-20 8-43.5 12.5T384-337q-99 0-169.5-70T144-576q0-37.78 9.5-71.89T182-711l144 144 70-70-144-144q29-17 62.5-26t69.5-9q100 0 170 71t70 170.19q0 22.81-4.5 42.31Q615-513 607-493l195 194q14 14.35 14 34.67Q816-244 802-230l-68 67q-14.09 14-34.04 14Q680-149 666-163Zm34-68 35-34-215-213q20-24 26-52.5t6-44.5q0-66.85-47.5-116.42Q457-741 390-744l82 81q11 11.18 11 26.09t-11.29 26.12L351.29-491.21Q340-480 325.82-480T301-491l-85-85q0 69 49.5 118T384-409q17 0 47-7t56-28l213 213ZM476-488Z"/></svg>
+          Service History
         </h2>
         <button
           onClick={() => navigate(`/logService?vehicleId=${vehicle.id}`)}
@@ -68,16 +69,16 @@ export default function VehicleDetails ({fetchVehicles, fetchServices}) {
           {vehicle.Services.map((s) => (
             <div
               key={s.id}
-              className="bg-neutral-800 border border-neutral-800 rounded-xl p-4 flex justify-between items-center">
+              className="bg-neutral-800 border border-neutral-800 rounded-xl p-3 flex justify-between items-center">
               <div>
                 <p className="font-medium">
                   {s.serviceType}
                 </p>
-                <p className="text-xs text-slate-400">
+                <p className="text-sm text-neutral-400 mt-1">
                   {new Date(s.date).toLocaleDateString()} • {s.mileage} mi
                 </p>
                 {s.notes && (
-                  <p className="text-sm text-slate-500 mt-1">
+                  <p className="text-sm text-neutral-400 mt-1">
                     {s.notes}
                   </p>
                 )}
