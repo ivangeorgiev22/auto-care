@@ -26,7 +26,7 @@ export default function Dashboard ({vehicles, services}) {
     <div>
       <h1 className="text-3xl mb-6 font-bold">Dashboard</h1>
       <div className="grid grid-cols-3 gap-6 mb-8">
-        <div className="bg-neutral-800 border border-neutral-800 flex items-center p-5 rounded-xl">
+        <div className="bg-neutral-800 border border-neutral-800 flex items-center p-5 rounded-xl hover:border-orange-500">
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
             height="50px" 
@@ -39,7 +39,7 @@ export default function Dashboard ({vehicles, services}) {
             <p className="text-neutral-400">Vehicles</p>
           </div>
         </div>
-        <div className="bg-neutral-800 border border-neutral-800 flex items-center p-5 rounded-xl">
+        <div className="bg-neutral-800 border border-neutral-800 flex items-center p-5 rounded-xl hover:border-orange-500">
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
             height="50px" 
@@ -52,13 +52,13 @@ export default function Dashboard ({vehicles, services}) {
             <p className="text-neutral-400">Service Records</p>
           </div>
         </div>
-        <div className="bg-neutral-800 border border-neutral-800 flex items-center p-5 rounded-xl">
+        <div className="bg-neutral-800 border border-neutral-800 flex items-center p-5 rounded-xl hover:border-orange-500">
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
             height="48px" 
             viewBox="0 -960 960 960" 
             width="48px" 
-            fill="#f9e509ff"><path d="m40-120 440-760 440 760H40Zm104-60h672L480-760 144-180Zm361.5-65.68q8.5-8.67 8.5-21.5 0-12.82-8.68-21.32-8.67-8.5-21.5-8.5-12.82 0-21.32 8.68-8.5 8.67-8.5 21.5 0 12.82 8.68 21.32 8.67 8.5 21.5 8.5 12.82 0 21.32-8.68ZM454-348h60v-224h-60v224Zm26-122Z"/>
+            fill="#e82c0fff"><path d="m40-120 440-760 440 760H40Zm104-60h672L480-760 144-180Zm361.5-65.68q8.5-8.67 8.5-21.5 0-12.82-8.68-21.32-8.67-8.5-21.5-8.5-12.82 0-21.32 8.68-8.5 8.67-8.5 21.5 0 12.82 8.68 21.32 8.67 8.5 21.5 8.5 12.82 0 21.32-8.68ZM454-348h60v-224h-60v224Zm26-122Z"/>
           </svg>
           <div className="ml-3">
             <p className="text-2xl font-bold mt-1">{overdueServices}</p>
@@ -74,7 +74,7 @@ export default function Dashboard ({vehicles, services}) {
       </div>
     ) : (
       recentActivity.map((s) => (
-        <div key={s.id} className="bg-neutral-800 border border-neutral-800 rounded-xl mb-3 flex justify-between">
+        <div key={s.id} className="bg-neutral-800 border border-neutral-800 rounded-xl mb-3 flex justify-between hover:border-orange-500">
           <div className="p-3">
             <p className="font-medium">{s.serviceType}</p>
             <p className="text-sm text-neutral-400 mb-1"> {new Date(s.date).toLocaleDateString()} • {s.mileage} mi </p>

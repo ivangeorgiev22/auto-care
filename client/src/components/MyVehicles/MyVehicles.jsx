@@ -10,7 +10,7 @@ export default function MyVehicles ({vehicles, fetchVehicles}) {
         <h1 className="text-3xl font-bold">My Vehicles</h1>
         <button 
           onClick={() => setIsSeen(true)} 
-          className="bg-orange-600 hover:bg-orange-400 px-5 py-2 rounded-lg font-medium cursor-pointer">
+          className="bg-orange-600 hover:bg-orange-700 px-5 py-2 rounded-lg font-medium cursor-pointer">
           + Add Vehicle
         </button>
       </div>

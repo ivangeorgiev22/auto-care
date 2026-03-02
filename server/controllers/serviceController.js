@@ -33,4 +33,22 @@ async function addService (req, res) {
   }
 };
 
-module.exports = {getServices, addService};
+async function deleteService(req, res) {
+  try {
+    const removed = await db.Service.destroy({
+      where: {
+        id: req.params.id
+      }
+    });
+    if (!removed) {
+      return res.status(404).json({msg: 'Service not found!'});
+    }
+
+    res.status(200).json({msg: 'Service deleted successfully!'});
+  } catch (error) {
+    res.status(500);
+    console.error(error);
+  }
+}
+
+module.exports = {getServices, addService, deleteService};

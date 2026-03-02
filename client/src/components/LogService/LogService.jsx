@@ -46,7 +46,7 @@ export default function LogService ({vehicles, fetchServices, fetchVehicles}) {
               required
               value={form.vehicleId} 
               onChange={(e) => setForm({...form, vehicleId: Number(e.target.value)})}
-              className="w-full bg-neutral-800 border border-neutral-700 rounded-xl p-2 cursor-pointer"
+              className="w-full bg-neutral-800 border border-neutral-700 rounded-xl p-2 cursor-pointer hover:border-orange-500 active:outline-orange-500 focus:outline-none"
             >
               <option value="">Select Vehicle</option>
               {vehicles.map((v) => (
@@ -62,7 +62,7 @@ export default function LogService ({vehicles, fetchServices, fetchVehicles}) {
               required 
               value={form.serviceType} 
               onChange={(e) => setForm({...form, serviceType: e.target.value})}
-              className="w-full bg-neutral-800 border border-neutral-700 rounded-xl p-2 cursor-pointer"
+              className="w-full bg-neutral-800 border border-neutral-700 rounded-xl p-2 cursor-pointer hover:border-orange-500 active:outline-orange-500 focus:outline-none"
             >
               <option value="">Select Service Type</option>
               <option>Oil Change</option>
@@ -81,7 +81,7 @@ export default function LogService ({vehicles, fetchServices, fetchVehicles}) {
                 type="date" 
                 value={form.date} 
                 onChange={(e) => setForm({...form, date: e.target.value})}
-                className="w-full bg-neutral-800 border border-neutral-700 rounded-xl p-2 cursor-pointer"
+                className="w-full bg-neutral-800 border border-neutral-700 rounded-xl p-2 cursor-pointer hover:border-orange-500 active:outline-orange-500 focus:outline-none"
               />
             </div>
             <div>
@@ -92,7 +92,7 @@ export default function LogService ({vehicles, fetchServices, fetchVehicles}) {
                 type="number" 
                 value={form.mileage} 
                 onChange={(e) => setForm({...form, mileage: e.target.value})}
-                className="w-full bg-neutral-800 border border-neutral-700 rounded-xl p-2" 
+                className="w-full bg-neutral-800 border border-neutral-700 rounded-xl p-2 hover:border-orange-500 active:outline-orange-500 focus:outline-none" 
               />
             </div>
           </div>
@@ -104,7 +104,7 @@ export default function LogService ({vehicles, fetchServices, fetchVehicles}) {
               type="number" 
               value={form.cost} 
               onChange={(e) => setForm({...form, cost: e.target.value})}
-              className="w-full bg-neutral-800 border border-neutral-700 rounded-xl p-2" 
+              className="w-full bg-neutral-800 border border-neutral-700 rounded-xl p-2 hover:border-orange-500 active:outline-orange-500 focus:outline-none" 
             />
           </div>
           <div>
@@ -114,12 +114,12 @@ export default function LogService ({vehicles, fetchServices, fetchVehicles}) {
               placeholder="Additional details..." 
               value={form.notes} 
               onChange={(e) => setForm({...form, notes: e.target.value})}
-              className="w-full bg-neutral-800 border border-neutral-700 rounded-xl p-2" 
+              className="w-full bg-neutral-800 border border-neutral-700 rounded-xl p-2 hover:border-orange-500 active:outline-orange-500 focus:outline-none" 
             />
           </div>
           <button 
             type="submit" 
-            className="w-full bg-orange-600 transition rounded-lg py-2 font-medium mt-2 cursor-pointer"> 
+            className="w-full bg-orange-600 transition rounded-lg py-2 font-medium mt-2 cursor-pointer hover:bg-orange-700"> 
             Log Service
           </button>
         </form>

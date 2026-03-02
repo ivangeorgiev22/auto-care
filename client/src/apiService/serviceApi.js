@@ -30,3 +30,20 @@ export async function addService (data) {
     console.error(error);
   }
 };
+
+export async function removeService (id) {
+  try {
+    const res = await fetch(`${URL}/services/${id}`, {
+      method: 'DELETE',
+      headers: {'Content-Type': 'application/json'}
+    });
+
+    if(!res.ok) {
+      throw new Error('Failed to delete service');
+    }
+
+    return res.json();
+  } catch (error) {
+    console.error(error);
+  }
+};
