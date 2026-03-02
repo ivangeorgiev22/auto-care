@@ -1,32 +1,27 @@
 import { serviceInterval } from "../../serviceInterval.js";
 
 export default function Dashboard ({vehicles, services}) {
-  // only get the last five to show in recent activity
   const recentActivity = services.slice(0,5);
-  //calculate overdue services
   const overdueServices = vehicles.filter((v) => {
-    //look at Oil Change service type only
     const oilChange = v.Services?.filter((s) => s.serviceType === 'Oil Change');
-    // if vehicle has no oil change services logged yet skip
+    
     if (!oilChange || oilChange.length === 0) return false;
-    // find the most recent one and grab it
+  
     const lastOilChange = oilChange.sort((a, b) => new Date(b.date) - new Date(a.date))[0];
-    // get the set interval for oil changes
     const {months} = serviceInterval.oilChange;
-    //based on the interval work out when it's due - 6 months after the last change
     const lastChanged = new Date(lastOilChange.date);
     const nextDue = new Date(lastChanged);
     nextDue.setMonth(nextDue.getMonth() + months);
-    //compare with today's date
+    
     return new Date() >= nextDue;
-  }).length; //count how many vehicles are overdue on oil changes
+  }).length;
 
   return (
   <div>
     <div>
       <h1 className="text-3xl mb-6 font-bold">Dashboard</h1>
       <div className="grid grid-cols-3 gap-6 mb-8">
-        <div className="bg-neutral-800 border border-neutral-800 flex items-center p-5 rounded-xl hover:border-orange-500">
+        <div className="bg-neutral-800 border border-neutral-800 flex items-center p-5 rounded-xl">
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
             height="50px" 
@@ -39,7 +34,7 @@ export default function Dashboard ({vehicles, services}) {
             <p className="text-neutral-400">Vehicles</p>
           </div>
         </div>
-        <div className="bg-neutral-800 border border-neutral-800 flex items-center p-5 rounded-xl hover:border-orange-500">
+        <div className="bg-neutral-800 border border-neutral-800 flex items-center p-5 rounded-xl">
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
             height="50px" 
@@ -52,7 +47,7 @@ export default function Dashboard ({vehicles, services}) {
             <p className="text-neutral-400">Service Records</p>
           </div>
         </div>
-        <div className="bg-neutral-800 border border-neutral-800 flex items-center p-5 rounded-xl hover:border-orange-500">
+        <div className="bg-neutral-800 border border-neutral-800 flex items-center p-5 rounded-xl">
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
             height="48px" 
@@ -74,8 +69,11 @@ export default function Dashboard ({vehicles, services}) {
       </div>
     ) : (
       recentActivity.map((s) => (
-        <div key={s.id} className="bg-neutral-800 border border-neutral-800 rounded-xl mb-3 flex justify-between hover:border-orange-500">
+        <div key={s.id} className="bg-neutral-800 border border-neutral-800 rounded-xl mb-3 flex justify-between">
           <div className="p-3">
+            <div className="flex gap-1 text-neutral-400">
+              <p>{s.Vehicle.licensePlate}</p>
+            </div>
             <p className="font-medium">{s.serviceType}</p>
             <p className="text-sm text-neutral-400 mb-1"> {new Date(s.date).toLocaleDateString()} • {s.mileage} mi </p>
             <p className="text-sm text-neutral-400 mt-1">{s.notes}</p>

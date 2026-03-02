@@ -4,7 +4,10 @@ const db = require('../models/index.js');
 async function getServices (req, res) {
   try {
     const services = await db.Service.findAll({
-      order: [['date', 'DESC']]
+      order: [['date', 'DESC']],
+      include: {
+        model: db.Vehicle
+      }
     });
 
     res.status(200).json(services);
@@ -49,6 +52,25 @@ async function deleteService(req, res) {
     res.status(500);
     console.error(error);
   }
+};
+
+async function updateService(req,res) {
+  try {
+    const [updated] = await db.Service.update(req.body, {
+      where: {
+        id: req.params.id
+      }
+    });
+
+    if(!updated) {
+      return res.status(404).json({msg: 'Service Record Not Found!'});
+    }
+
+    res.status(200).json({msg: 'Service Record Updated Successfully!'});
+  } catch (error) {
+    res.status(500);
+    console.log(error);
+  }
 }
 
-module.exports = {getServices, addService, deleteService};
+module.exports = {getServices, addService, deleteService, updateService};

@@ -47,3 +47,17 @@ export async function removeService (id) {
     console.error(error);
   }
 };
+
+export async function editService(id, data) {
+  try {
+    const res = await fetch(`${URL}/services/${id}`, {
+      method: 'PATCH',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(data)
+    });
+
+    return res.json();
+  } catch (error) {
+    console.error(error);
+  }
+};

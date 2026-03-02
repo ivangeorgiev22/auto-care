@@ -7,7 +7,9 @@ export default function Navbar() {
       <div className="max-w-6xl mx-auto px-8 h-16 flex items-center">
         <div className="flex items-center gap-8">
           <div className="font-bold text-orange-500 text-xl">
+            <Link to='/'>
             <img className='w-40' src={logo}/>
+            </Link>
           </div>
           <div className="flex gap-5 text-neutral-400">
             <Link to="/" className="hover:text-white transition flex items-center gap-1">

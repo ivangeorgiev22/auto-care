@@ -37,7 +37,7 @@ function App() {
             <Route path='/' element={<Dashboard vehicles={vehicles} services={services} />}/>
             <Route path='/vehicles' element={<MyVehicles vehicles={vehicles} fetchVehicles={fetchVehicles} />}/>
             <Route path='/vehicles/:id' element={<VehicleDetails fetchVehicles={fetchVehicles} fetchServices={fetchServices} />}/>
-            <Route path='/logService' element={<LogService vehicles={vehicles} fetchServices={fetchServices} fetchVehicles={fetchVehicles} />}/>
+            <Route path='/logService' element={<LogService vehicles={vehicles} services={services} fetchServices={fetchServices} fetchVehicles={fetchVehicles} />}/>
           </Routes>
         </div>
       </div>

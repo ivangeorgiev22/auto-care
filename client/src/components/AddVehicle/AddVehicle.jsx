@@ -20,7 +20,18 @@ export default function AddVehicle({onClose, fetchVehicles}) {
   return (
     <div className="fixed inset-0 bg-black/70 flex items-center justify-center">
       <div className="bg-neutral-800 border border-neutral-700 p-6 rounded-xl w-96">
-        <h2 className="text-xl mb-4">Add Vehicle</h2>
+        <div className="flex justify-between items-start">
+          <h2 className="text-xl mb-4">Add Vehicle</h2>
+          <button className="hover:bg-red-500 rounded cursor-pointer" onClick={onClose}>
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              height="25px" 
+              viewBox="0 -960 960 960" 
+              width="25px" 
+              fill="#e3e3e3"><path d="m291-240-51-51 189-189-189-189 51-51 189 189 189-189 51 51-189 189 189 189-51 51-189-189-189 189Z"/>
+            </svg>
+          </button>
+        </div>
         <form onSubmit={handleSubmit} className="space-y-3">
           <label>Make</label>
           <input 
@@ -38,7 +49,10 @@ export default function AddVehicle({onClose, fetchVehicles}) {
           />
           <label>Year</label>
           <input 
-            required 
+            required
+            min='1950'
+            max='2026'
+            type="number" 
             placeholder="Year" 
             onChange={(e) => setForm({...form, year: e.target.value})} 
             className="bg-neutral-800 border border-neutral-700 p-2 rounded w-full mt-1 hover:border-orange-500 active:outline-orange-500 focus:outline-none"

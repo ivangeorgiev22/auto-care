@@ -1,15 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from 'react-router';
-import { addService } from "../../apiService/serviceApi";
+import { addService, editService } from "../../apiService/serviceApi";
 import { Link } from "react-router";
+import {format} from 'date-fns';
 
 
 
-export default function LogService ({vehicles, fetchServices, fetchVehicles}) {
+export default function LogService ({vehicles,services, fetchServices, fetchVehicles}) {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
   const selectedVehicle = searchParams.get('vehicleId');
+  const serviceEdit = searchParams.get('edit');
 
   const [form, setForm] = useState({
     vehicleId: selectedVehicle || '',
@@ -18,14 +20,43 @@ export default function LogService ({vehicles, fetchServices, fetchVehicles}) {
     mileage: '',
     cost: '',
     notes: ''
-  })
+  });
+
+  useEffect(() => {
+    if (serviceEdit) {
+     const service = services.find((s) => s.id === Number(serviceEdit));
+
+      if(service) {
+       setForm({
+          vehicleId: service.vehicleId,
+          serviceType: service.serviceType,
+          date: format(service.date, 'yyyy-MM-dd'),
+          mileage: service.mileage,
+          cost: service.cost,
+          notes: service.notes || ''
+        });
+      }
+    }
+  }, [serviceEdit, services]);
 
   async function handleSubmit(e) {
     e.preventDefault();
-    await addService(form);
+
+    if(serviceEdit) {
+      await editService(serviceEdit, form)
+    } else {
+      await addService(form);
+    }
+
     await fetchServices();
     await fetchVehicles();
-    navigate('/');
+
+    if(selectedVehicle){
+      navigate(`/vehicles/${selectedVehicle}`);
+    } else {
+      navigate('/');
+    }
+    
   }
 
   if (vehicles.length === 0) {
@@ -117,11 +148,16 @@ export default function LogService ({vehicles, fetchServices, fetchVehicles}) {
               className="w-full bg-neutral-800 border border-neutral-700 rounded-xl p-2 hover:border-orange-500 active:outline-orange-500 focus:outline-none" 
             />
           </div>
+          <div className="flex gap-4">
           <button 
             type="submit" 
-            className="w-full bg-orange-600 transition rounded-lg py-2 font-medium mt-2 cursor-pointer hover:bg-orange-700"> 
-            Log Service
+            className="w-60 bg-orange-600 rounded-lg py-2 font-medium mt-2 cursor-pointer hover:bg-orange-700"> 
+            {serviceEdit ? 'Update Service' : 'Log Service'}
           </button>
+          <button className="w-60 bg-red-600 py-2 mt-2 rounded-lg font-medium cursor-pointer hover:bg-red-800" onClick={() => navigate(-1)}>
+            Cancel
+          </button>
+          </div>
         </form>
       </div>
     </div>
