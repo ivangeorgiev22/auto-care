@@ -33,39 +33,55 @@ export default function AddVehicle({onClose, fetchVehicles}) {
           </button>
         </div>
         <form onSubmit={handleSubmit} className="space-y-3">
-          <label>Make</label>
-          <input 
-            required 
-            placeholder="Make" 
-            onChange={(e) => setForm({...form, make: e.target.value})} 
-            className="bg-neutral-800 border border-neutral-700 p-2 rounded w-full mt-1 hover:border-orange-500 active:outline-orange-500 focus:outline-none"
-          />
-          <label>Model</label>
-          <input 
-            required 
-            placeholder="Model" 
-            onChange={(e) => setForm({...form, model: e.target.value})} 
-            className="bg-neutral-800 border border-neutral-700 p-2 rounded w-full mt-1 hover:border-orange-500 active:outline-orange-500 focus:outline-none" 
-          />
-          <label>Year</label>
-          <input 
-            required
-            min='1950'
-            max='2026'
-            type="number" 
-            placeholder="Year" 
-            onChange={(e) => setForm({...form, year: e.target.value})} 
-            className="bg-neutral-800 border border-neutral-700 p-2 rounded w-full mt-1 hover:border-orange-500 active:outline-orange-500 focus:outline-none"
-          />
-          <label>License Plate</label>
-          <input 
-            required 
-            placeholder="License Plate" 
-            onChange={(e) => setForm({...form, licensePlate: e.target.value})} 
-            className="bg-neutral-800 border border-neutral-700 p-2 rounded w-full mt-1 hover:border-orange-500 active:outline-orange-500 focus:outline-none" 
-          />
-          <div className="flex justify-center mt-2">
-            <button className="bg-orange-600 px-3 py-2 rounded w-full cursor-pointer hover:bg-orange-700">Add Vehicle</button>
+          <div>
+            <label className="ml-1">
+              Make
+            </label>
+            <input 
+              required  
+              onChange={(e) => setForm({...form, make: e.target.value})} 
+              className="bg-neutral-800 border border-neutral-700 p-2 rounded-xl w-full mt-1 hover:border-orange-500 active:outline-orange-500 focus:outline-none"
+            />
+          </div>
+
+          <div>
+            <label className="ml-1">
+              Model
+            </label>
+            <input 
+              required
+              onChange={(e) => setForm({...form, model: e.target.value})} 
+              className="bg-neutral-800 border border-neutral-700 p-2 rounded-xl w-full mt-1 hover:border-orange-500 active:outline-orange-500 focus:outline-none" 
+            />
+          </div>
+
+          <div>
+            <label className="ml-1">
+              Year
+            </label>
+            <input 
+              required
+              min='1950'
+              max='2026'
+              type="number"
+              onChange={(e) => setForm({...form, year: e.target.value})} 
+              className="bg-neutral-800 border border-neutral-700 p-2 rounded-xl w-full mt-1 hover:border-orange-500 active:outline-orange-500 focus:outline-none"
+            />
+          </div>
+
+          <div>
+            <label className="ml-1">
+              License Plate
+            </label>
+            <input 
+              required
+              onChange={(e) => setForm({...form, licensePlate: e.target.value})} 
+              className="bg-neutral-800 border border-neutral-700 p-2 rounded-xl w-full mt-1 hover:border-orange-500 active:outline-orange-500 focus:outline-none" 
+            />
+          </div>
+
+          <div className="flex justify-center mt-5">
+            <button className="bg-orange-600 px-3 py-2 rounded-xl w-full cursor-pointer hover:bg-orange-700">Add Vehicle</button>
           </div>
         </form>
       </div>

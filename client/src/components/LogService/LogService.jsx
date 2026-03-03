@@ -67,7 +67,7 @@ export default function LogService ({vehicles,services, fetchServices, fetchVehi
     );
   }
   return (
-    <div className="flex justify-center mt-4">
+    <div className="flex justify-center mt-1">
       <div className="bg-neutral-800 border border-neutral-800 rounded-xl p-8 w-[550px] shadow-xl">
         <h2 className="text-2xl font-semibold mb-6 text-white">Log Service</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -110,7 +110,8 @@ export default function LogService ({vehicles,services, fetchServices, fetchVehi
               <input 
                 required
                 type="date" 
-                value={form.date} 
+                value={form.date}
+                onClick={(e) => e.target.showPicker?.()} 
                 onChange={(e) => setForm({...form, date: e.target.value})}
                 className="w-full bg-neutral-800 border border-neutral-700 rounded-xl p-2 cursor-pointer hover:border-orange-500 active:outline-orange-500 focus:outline-none"
               />

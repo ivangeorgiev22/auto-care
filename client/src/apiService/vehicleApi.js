@@ -6,7 +6,7 @@ export async function getVehicles () {
     const res = await fetch(`${URL}/vehicles`);
 
     if(!res.ok) {
-      throw new Error('Failed to fetch vehicles');
+      throw new Error(`Failed to fetch vehicles: ${res.status}`);
     }
     return res.json();
   } catch (error) {
@@ -19,7 +19,7 @@ export async function getVehicleById(id) {
     const res = await fetch(`${URL}/vehicles/${id}`);
 
     if(!res.ok) {
-      throw new Error('Failed to fetch vehicle');
+      throw new Error(`Failed to fetch vehicle: ${res.status}`);
     }
     return res.json();
   } catch (error) {
@@ -28,6 +28,7 @@ export async function getVehicleById(id) {
 };
 
 export async function addVehicle(data) {
+  // data = {make, model, year, licensePlate};
   try {
     const res = await fetch(`${URL}/vehicles`, {
       method: 'POST',
@@ -36,7 +37,7 @@ export async function addVehicle(data) {
     });
 
     if (!res.ok) {
-      throw new Error('Failed to add vehicle');
+      throw new Error(`Failed to add vehicle: ${res.status}`);
     }
 
     return res.json();
@@ -53,7 +54,7 @@ export async function removeVehicle(id) {
     });
 
     if (!res.ok) {
-      throw new Error('Failed to delete vehicle');
+      throw new Error(`Failed to delete vehicle: ${res.status}`);
     }
 
     return res.json();

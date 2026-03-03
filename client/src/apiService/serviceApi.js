@@ -5,7 +5,7 @@ export async function getServices () {
     const res = await fetch(`${URL}/services`);
 
     if(!res.ok) {
-      throw new Error('Failed to fetch services');
+      throw new Error(`Failed to fetch services: ${res.status}`);
     }
     return res.json();
   } catch (error) {
@@ -22,7 +22,7 @@ export async function addService (data) {
     });
 
     if(!res.ok) {
-      throw new Error('Failed to add service');
+      throw new Error(`Failed to add service: ${res.status}`);
     }
 
     return res.json();
@@ -39,7 +39,7 @@ export async function removeService (id) {
     });
 
     if(!res.ok) {
-      throw new Error('Failed to delete service');
+      throw new Error(`Failed to delete service: ${res.status}`);
     }
 
     return res.json();

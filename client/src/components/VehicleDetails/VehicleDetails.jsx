@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import {useNavigate, useParams} from 'react-router'
 import { getVehicleById, removeVehicle } from '../../apiService/vehicleApi';
 import { removeService } from '../../apiService/serviceApi';
+import { format } from 'date-fns';
 
 export default function VehicleDetails ({fetchVehicles, fetchServices}) {
   const navigate = useNavigate();
@@ -17,9 +18,9 @@ export default function VehicleDetails ({fetchVehicles, fetchServices}) {
   }, [id]);
 
   async function handleDelete () {
-    const confirm = window.confirm('Are you sure you want to delete this vehicle?');
+    const confirmed = window.confirm('Are you sure you want to delete this vehicle?');
 
-    if (!confirm) return;
+    if (!confirmed) return;
 
     await removeVehicle(id);
     await fetchVehicles();
@@ -28,9 +29,9 @@ export default function VehicleDetails ({fetchVehicles, fetchServices}) {
   }
 
   async function handleServiceDelete (serviceId) {
-    const confirm = window.confirm('Are you sure you want to delete this service?');
+    const confirmed = window.confirm('Are you sure you want to delete this service?');
 
-    if(!confirm) return;
+    if(!confirmed) return;
 
     await removeService(serviceId);
     await fetchServices();
@@ -93,7 +94,7 @@ export default function VehicleDetails ({fetchVehicles, fetchServices}) {
           + Log Service
         </button>
       </div>
-      {vehicle.Services.length === 0 ? (
+      {vehicle.Services?.length === 0 ? (
         <div className="border border-neutral-700 rounded-xl p-6 text-slate-400 text-sm text-center">
           No services logged yet.
         </div>
@@ -108,7 +109,7 @@ export default function VehicleDetails ({fetchVehicles, fetchServices}) {
                   {s.serviceType}
                 </p>
                 <p className="text-sm text-neutral-400 mt-1">
-                  {new Date(s.date).toLocaleDateString()} • {s.mileage} mi
+                  {new Date(s.date).toLocaleDateString('en-GB')} • {s.mileage.toLocaleString()} mi
                 </p>
                 {s.notes && (
                   <p className="text-sm text-neutral-400 mt-1">
@@ -118,7 +119,7 @@ export default function VehicleDetails ({fetchVehicles, fetchServices}) {
               </div>
               <div className='flex gap-2'>
                 <p className="font-semibold">
-                  £{s.cost}
+                  £{s.cost.toFixed(2)}
                 </p>
                 <button onClick={() => navigate(`/logService?vehicleId=${vehicle.id}&edit=${s.id}`)} className='hover:bg-neutral-600 cursor-pointer rounded'>
                   <svg 

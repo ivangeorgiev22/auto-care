@@ -1,20 +1,27 @@
+import { useMemo } from "react";
 import { serviceInterval } from "../../serviceInterval.js";
 
 export default function Dashboard ({vehicles, services}) {
   const recentActivity = services.slice(0,5);
-  const overdueServices = vehicles.filter((v) => {
-    const oilChange = v.Services?.filter((s) => s.serviceType === 'Oil Change');
-    
-    if (!oilChange || oilChange.length === 0) return false;
   
-    const lastOilChange = oilChange.sort((a, b) => new Date(b.date) - new Date(a.date))[0];
-    const {months} = serviceInterval.oilChange;
-    const lastChanged = new Date(lastOilChange.date);
-    const nextDue = new Date(lastChanged);
-    nextDue.setMonth(nextDue.getMonth() + months);
+  const overdueServices = useMemo(() => {
+    return vehicles.filter((v) => {
+      const oilChange = v.Services?.filter((s) => s.serviceType === 'Oil Change');
+      
+      if (!oilChange || oilChange.length === 0) return false;
     
-    return new Date() >= nextDue;
-  }).length;
+      const lastOilChange = oilChange.reduce((latest, current) =>
+        new Date(current.date) > new Date(latest.date) ? current : latest 
+      );
+
+      const {months} = serviceInterval.oilChange;
+      const lastChanged = new Date(lastOilChange.date);
+      const nextDue = new Date(lastChanged);
+      nextDue.setMonth(nextDue.getMonth() + months);
+      
+      return new Date() >= nextDue;
+    }).length;
+  }, [vehicles]); 
 
   return (
   <div>
@@ -75,11 +82,11 @@ export default function Dashboard ({vehicles, services}) {
               <p>{s.Vehicle.licensePlate}</p>
             </div>
             <p className="font-medium">{s.serviceType}</p>
-            <p className="text-sm text-neutral-400 mb-1"> {new Date(s.date).toLocaleDateString()} • {s.mileage} mi </p>
+            <p className="text-sm text-neutral-400 mb-1"> {new Date(s.date).toLocaleDateString()} • {s.mileage.toLocaleString()} mi </p>
             <p className="text-sm text-neutral-400 mt-1">{s.notes}</p>
           </div>
           <div className="text-right p-3 content-center">
-            <p className="font-semibold">£{s.cost}</p>
+            <p className="font-semibold">£{s.cost.toFixed(2)}</p>
           </div>
         </div>
       ))
